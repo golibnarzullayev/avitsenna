@@ -18,7 +18,6 @@
     "noEmit": false,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "importHelpers": true,
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"]
