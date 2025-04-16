@@ -30,7 +30,7 @@ class NewsService {
     res.render("admin/news/index", {
       title: "Boshqaruv paneli - Yangiliklar",
       activeUrl: "/admin/news",
-      pageTitle: "Rahbariyat",
+      pageTitle: "Yangiliklar",
       admin,
       news: result.data,
       pageCount: Math.ceil(result.totalCount / 10),
