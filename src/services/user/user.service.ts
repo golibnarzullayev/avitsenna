@@ -32,6 +32,7 @@ class UserService {
     res.render("home", {
       news: rest,
       latest: first,
+      title: "Avitsenna School — zamonaviy ta'lim muassasasi.",
     });
   };
 
@@ -75,6 +76,7 @@ class UserService {
 
     res.render("classes", {
       classes: result.data,
+      title: "Avitsenna School — Sinflar.",
     });
   };
 
@@ -93,14 +95,8 @@ class UserService {
     >(pipeline);
 
     res.render("leaderships", {
-      leaderships: [
-        ...result.data,
-        ...result.data,
-        ...result.data,
-        ...result.data,
-        ...result.data,
-        ...result.data,
-      ],
+      leaderships: result.data,
+      title: "Avitsenna School — Rahbariyat.",
     });
   };
 
@@ -127,6 +123,9 @@ class UserService {
       news,
       lastestNews,
       title: news.title,
+      shortDescription: news.shortDescription,
+      imageUrl: `https://avitsennamaktabi.uz/${news.image}`,
+      blogUrl: `https://avitsennamaktabi.uz/news/${news.slug}`,
     });
   };
 
