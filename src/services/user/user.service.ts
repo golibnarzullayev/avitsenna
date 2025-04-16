@@ -88,17 +88,32 @@ class UserService {
       return res.redirect(`?page=1`);
     }
 
-    const pipeline = new MongoQueryService({ ...req.query, limit: "all" })
+    const pipelineLeader = new MongoQueryService({ ...req.query, limit: "all" })
       .paginating()
+      .filtering({}, { isLeader: true })
       .sorting("createdAt", OrderBy.Desc)
       .getPipeline();
 
-    const result = await this.leadershipRepo.aggregate<
+    const pipelineTeacher = new MongoQueryService({
+      ...req.query,
+      limit: "all",
+    })
+      .paginating()
+      .filtering({}, { isLeader: false })
+      .sorting("createdAt", OrderBy.Desc)
+      .getPipeline();
+
+    const resultLeader = await this.leadershipRepo.aggregate<
       IPagedResult<ILeadership>
-    >(pipeline);
+    >(pipelineLeader);
+
+    const resultTeacher = await this.leadershipRepo.aggregate<
+      IPagedResult<ILeadership>
+    >(pipelineTeacher);
 
     res.render("leaderships", {
-      leaderships: result.data,
+      leaderships: resultLeader.data,
+      teachers: resultTeacher.data,
       title: "Avitsenna School — Rahbariyat.",
     });
   };

@@ -135,6 +135,23 @@
         min-height: 400px;
         object-fit: cover;
     }
+
+    .gallery-title {
+        position: relative;
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    
+    .gallery-title:after {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 4px;
+        background-color: #3498db;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
     
     @media (max-width: 992px) {
         .main-leader-img {
@@ -147,23 +164,42 @@
 
 <header class="news-header text-center">
   <div class="container">
-    <h1 data-aos="fade-up">Avitsenna maktabidagi sinflar</h1>
-    <p data-aos="fade-up" data-aos-delay="100">Maktabimizda sinflar bilan tanishing</p>
+    <h1 data-aos="fade-up">Avitsenna maktabi boshqaruv tizimi</h1>
+    <p data-aos="fade-up" data-aos-delay="100">Avitsenna maktabidagi boshqaruv tizimi bilan tanishing</p>
   </div>
 </header>
 
 
 
 <section class="container mb-4">
-
-  
   <div class="row g-4">
+    <div class="col-12">
+            <h2 class="gallery-title">Rahbarlar</h2>
+        </div>
     {{#each leaderships}}
       <div class="col-lg-4 col-md-6">
         <div class="card team-card">
           <div class="position-relative">
             <img src="{{image}}" class="card-img-top" alt="Kamola Abdullayeva">
-            <div class="leader-badge">{{#ifEquals isLeader true}} Rahbar {{else}} O'qituvchi {{/ifEquals}}</div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{fullName}}</h3>
+            <div class="position-badge">{{position}}</div>
+            <p class="card-text">{{description}}</p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+    <div class="row g-4 mt-5">
+      <div class="col-12">
+            <h2 class="gallery-title">O'qituvchilar</h2>
+        </div>
+      {{#each teachers}}
+      <div class="col-lg-4 col-md-6">
+        <div class="card team-card">
+          <div class="position-relative">
+            <img src="{{image}}" class="card-img-top" alt="Kamola Abdullayeva">
           </div>
           <div class="card-body">
             <h3 class="card-title">{{fullName}}</h3>
@@ -173,6 +209,6 @@
         </div>
       </div>
     {{/each}}  
-  </div>
+    </div>
 </section>
 {{> footer}}
