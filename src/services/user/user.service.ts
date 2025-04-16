@@ -1,10 +1,12 @@
 import { OrderBy } from "@/enums/mongo-query.enum";
 import { NewsStatus } from "@/enums/news-status.enum";
 import { IPagedResult, IRequest } from "@/interfaces";
+import { IAchievement } from "@/interfaces/achievement.interface";
 import { IClasses } from "@/interfaces/classes.interface";
 import { IGallery } from "@/interfaces/gallery.interface";
 import { ILeadership } from "@/interfaces/leadership.interface";
 import { INews } from "@/interfaces/news.interface";
+import { AchievementRepo } from "@/repository/achievement.repo";
 import { ApplicationRepo } from "@/repository/application.repo";
 import { ClassesRepo } from "@/repository/classes.model";
 import { GalleryRepo } from "@/repository/gallery.repo";
@@ -19,6 +21,7 @@ class UserService {
   private leadershipRepo = new LeadershipRepo();
   private applicationRepo = new ApplicationRepo();
   private galleryRepo = new GalleryRepo();
+  private achievementRepo = new AchievementRepo();
 
   public renderHomePage = async (req: IRequest, res: Response) => {
     const news = await this.newsRepo.getMany(
@@ -160,6 +163,22 @@ class UserService {
     res.render("gallery", {
       title: "Avitsenna School — Fotosuratlar.",
       galleries: result.data,
+    });
+  };
+
+  public renderAchievementsPage = async (req: IRequest, res: Response) => {
+    const pipeline = new MongoQueryService({ ...req.query, limit: "all" })
+      .paginating()
+      .sorting("createdAt", OrderBy.Desc)
+      .getPipeline();
+
+    const result = await this.achievementRepo.aggregate<
+      IPagedResult<IAchievement>
+    >(pipeline);
+
+    res.render("achievements", {
+      title: "Avitsenna School — Yutuqlar.",
+      achievements: result.data,
     });
   };
 

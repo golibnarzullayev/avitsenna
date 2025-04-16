@@ -26,6 +26,10 @@ class UserRoute {
       `${this.path}/galleries`,
       this.controller.renderGalleriesPage
     );
+    this.router.get(
+      `${this.path}/achievements`,
+      this.controller.renderAchievementsPage
+    );
     this.router.post(`${this.path}/applications`, this.controller.applications);
   }
 }

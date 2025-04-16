@@ -8,7 +8,8 @@ import DirectionRoute from "@/routes/direction.route";
 import UserRoute from "@/routes/user.route";
 import NewsRoute from "@/routes/news.route";
 import ApplicationRoute from "@/routes/application.route";
-import GalleryRoute from "./routes/gallery.route";
+import GalleryRoute from "@/routes/gallery.route";
+import AchievementRoute from "@/routes/achievement.route";
 
 (async () => {
   try {
@@ -23,6 +24,7 @@ import GalleryRoute from "./routes/gallery.route";
       new NewsRoute(),
       new ApplicationRoute(),
       new GalleryRoute(),
+      new AchievementRoute(),
     ]);
     await server.run();
   } catch (error) {

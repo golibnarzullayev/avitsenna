@@ -29,6 +29,10 @@ class UserController {
     this.service.renderGalleriesPage(req, res);
   };
 
+  public renderAchievementsPage = async (req: IRequest, res: Response) => {
+    this.service.renderAchievementsPage(req, res);
+  };
+
   public applications = async (req: IRequest, res: Response) => {
     this.service.applications(req, res);
   };

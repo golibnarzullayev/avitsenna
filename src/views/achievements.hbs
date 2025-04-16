@@ -1,0 +1,75 @@
+<style>
+    .news-header {
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 100%), url('assets/img/virtual-tour-2.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 5rem 0;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .news-header h1 {
+      font-weight: 700;
+      font-size: 3rem;
+      letter-spacing: -0.5px;
+    }
+    
+    .news-header p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+   .achievement-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .achievement-image {
+            height: 200px;
+            object-fit: cover;
+        }
+        .badge-corner {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .header-bg {
+            background: linear-gradient(to right, #3494e6, #ec6ead);
+            color: white;
+        }
+</style>
+
+{{> navbar}}
+
+<header class="news-header text-center">
+  <div class="container">
+    <h1 data-aos="fade-up">Maktabdan fotosuratlar</h1>
+    <p data-aos="fade-up" data-aos-delay="100">Maktabimizning eng yorqin lahzalari va muhim tadbirlari</p>
+  </div>
+</header>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5" id="achievementsContainer">
+        {{#each achievements}}
+        <div class="card achievement-card position-relative">
+            <span class="badge bg-success badge-corner">Yutuq</span>
+            <img src="{{image}}" class="card-img-top achievement-image" alt="{{fullName}} yutuği">
+            <div class="card-body">
+                <h5 class="card-title">{{fullName}}</h5>
+                <p class="card-text">{{description}}</p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <small class="text-muted">Sana: {{formatDate createdAt}}</small>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+{{> footer}}

@@ -4,16 +4,16 @@ import { Response } from "express";
 import path from "node:path";
 import fs from "node:fs";
 import { OrderBy } from "@/enums/mongo-query.enum";
-import { GalleryRepo } from "@/repository/gallery.repo";
-import { IGallery } from "@/interfaces/gallery.interface";
+import { IAchievement } from "@/interfaces/achievement.interface";
+import { AchievementRepo } from "@/repository/achievement.repo";
 
-class GalleryService {
-  private repo = new GalleryRepo();
+class AchievementService {
+  private repo = new AchievementRepo();
 
   public renderHomePage = async (req: IRequest, res: Response) => {
     const admin = req.session.admin;
 
-    if (req.url === "/admin/galleries") {
+    if (req.url === "/admin/achievements") {
       return res.redirect(`?page=1`);
     }
 
@@ -22,14 +22,16 @@ class GalleryService {
       .paginating()
       .getPipeline();
 
-    const result = await this.repo.aggregate<IPagedResult<IGallery>>(pipeline);
+    const result = await this.repo.aggregate<IPagedResult<IAchievement>>(
+      pipeline
+    );
 
-    res.render("admin/galleries/index", {
-      title: "Boshqaruv paneli - Fotosuratlar",
-      activeUrl: "/admin/galleries",
-      pageTitle: "Fotosuratlar",
+    res.render("admin/achievements/index", {
+      title: "Boshqaruv paneli - Yutuqlar",
+      activeUrl: "/admin/achievements",
+      pageTitle: "Yutuqlar",
       admin,
-      galleries: result.data,
+      achievements: result.data,
       pageCount: Math.ceil(result.totalCount / 10),
       pagination: {
         page: parseInt(req.query.page as string),
@@ -41,85 +43,85 @@ class GalleryService {
   public renderAddPage = (req: IRequest, res: Response) => {
     const admin = req.session.admin;
 
-    res.render("admin/galleries/add", {
-      title: "Boshqaruv paneli - Yangi fotosurat qo'shish",
-      pageTitle: "Fotosurat qo'shish",
-      activeUrl: "/admin/galleries",
+    res.render("admin/achievements/add", {
+      title: "Boshqaruv paneli - Yangi yutuq qo'shish",
+      pageTitle: "Yutuq qo'shish",
+      activeUrl: "/admin/achievements",
       admin,
       addErr: req.flash("addErr")[0],
     });
   };
 
   public create = async (req: IRequest, res: Response) => {
-    const { title, description } = req.body;
+    const { fullName, description } = req.body;
     const fileName = req.file.filename;
 
     await this.repo.create({
-      title,
+      fullName,
       description,
-      image: `/uploads/galleries/${fileName}`,
+      image: `/uploads/achievements/${fileName}`,
     });
 
-    res.redirect("/admin/galleries");
+    res.redirect("/admin/achievements");
   };
 
   public renderEditPage = async (req: IRequest, res: Response) => {
     const admin = req.session.admin;
     const id = req.params.id;
 
-    const gallery = await this.repo.getById(id);
+    const achievement = await this.repo.getById(id);
 
-    res.render("admin/galleries/edit", {
-      title: "Boshqaruv paneli - Fotosuratni tahrirlash",
-      pageTitle: "Fotosuratni tahrirlash",
-      activeUrl: "/admin/galleries",
+    res.render("admin/achievements/edit", {
+      title: "Boshqaruv paneli - Yutuqni tahrirlash",
+      pageTitle: "Yutuqni tahrirlash",
+      activeUrl: "/admin/achievements",
       admin,
       updateErr: req.flash("updateErr")[0],
-      gallery,
+      achievement,
     });
   };
 
   public edit = async (req: IRequest, res: Response) => {
     const id = req.params.id;
 
-    const data: Partial<IGallery> = {};
-    const { title, description } = req.body;
+    const data: Partial<IAchievement> = {};
+    const { fullName, description } = req.body;
 
-    const gallery = await this.repo.getById(id);
+    const achievement = await this.repo.getById(id);
 
-    if (title) data.title = title;
+    if (fullName) data.fullName = fullName;
     if (description) data.description = description;
 
     if (req.file) {
       const oldImagePath = path.join(
         __dirname,
-        `../../../public${gallery.image}`
+        `../../../public${achievement.image}`
       );
 
       fs.unlinkSync(oldImagePath);
 
-      data.image = `/uploads/galleries/${req.file.filename}`;
+      data.image = `/uploads/achievements/${req.file.filename}`;
     }
 
     await this.repo.updateById(id, data);
 
-    res.redirect("/admin/galleries");
+    res.redirect("/admin/achievements");
   };
 
   public delete = async (req: IRequest, res: Response) => {
     const id = req.params.id;
 
-    const gallery = await this.repo.getById(id);
+    const achievement = await this.repo.getById(id);
     const oldImagePath = path.join(
       __dirname,
-      `../../../public${gallery.image}`
+      `../../../public${achievement.image}`
     );
     fs.unlinkSync(oldImagePath);
 
     await this.repo.deleteById(id);
 
-    res.redirect("/admin/galleries");
+    res.redirect("/admin/achievements");
   };
 }
 
-export default GalleryService;
+export default AchievementService;
