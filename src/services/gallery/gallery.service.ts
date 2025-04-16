@@ -1,38 +1,36 @@
 import { IPagedResult, IRequest } from "@/interfaces";
 import { ILeadership } from "@/interfaces/leadership.interface";
-import { LeadershipRepo } from "@/repository/leadership.repo";
 import MongoQueryService from "@/utils/mongo-query.util";
 import { Response } from "express";
 import path from "node:path";
 import fs from "node:fs";
 import { OrderBy } from "@/enums/mongo-query.enum";
+import { GalleryRepo } from "@/repository/gallery.repo";
+import { IGallery } from "@/interfaces/gallery.interface";
 
-class LeadershipService {
-  private repo = new LeadershipRepo();
+class GalleryService {
+  private repo = new GalleryRepo();
 
   public renderHomePage = async (req: IRequest, res: Response) => {
     const admin = req.session.admin;
 
-    if (req.url === "/admin/leadership") {
+    if (req.url === "/admin/galleries") {
       return res.redirect(`?page=1`);
     }
 
     const pipeline = new MongoQueryService(req.query)
-      .searching("fullName")
       .sorting("createdAt", OrderBy.Desc)
       .paginating()
       .getPipeline();
 
-    const result = await this.repo.aggregate<IPagedResult<ILeadership>>(
-      pipeline
-    );
+    const result = await this.repo.aggregate<IPagedResult<IGallery>>(pipeline);
 
-    res.render("admin/leadership/index", {
-      title: "Boshqaruv paneli - rahbariyat",
-      activeUrl: "/admin/leadership",
-      pageTitle: "Rahbariyat",
+    res.render("admin/galleries/index", {
+      title: "Boshqaruv paneli - Fotosuratlar",
+      activeUrl: "/admin/galleries",
+      pageTitle: "Fotosuratlar",
       admin,
-      leaderships: result.data,
+      galleries: result.data,
       pageCount: Math.ceil(result.totalCount / 10),
       pagination: {
         page: parseInt(req.query.page as string),
@@ -44,89 +42,85 @@ class LeadershipService {
   public renderAddPage = (req: IRequest, res: Response) => {
     const admin = req.session.admin;
 
-    res.render("admin/leadership/add", {
-      title: "Boshqaruv paneli - Rahbariyatga a'zo qo'shish",
-      pageTitle: "Rahbariyat qo'shish",
-      activeUrl: "/admin/leadership",
+    res.render("admin/galleries/add", {
+      title: "Boshqaruv paneli - Yangi fotosurat qo'shish",
+      pageTitle: "Fotosurat qo'shish",
+      activeUrl: "/admin/galleries",
       admin,
       addErr: req.flash("addErr")[0],
     });
   };
 
   public create = async (req: IRequest, res: Response) => {
-    const { fullName, position, isLeader, description } = req.body;
+    const { title, description } = req.body;
     const fileName = req.file.filename;
 
     await this.repo.create({
-      fullName,
-      position,
-      isLeader: isLeader === "on",
+      title,
       description,
-      image: `/uploads/leaderships/${fileName}`,
+      image: `/uploads/galleries/${fileName}`,
     });
 
-    res.redirect("/admin/leadership");
+    res.redirect("/admin/galleries");
   };
 
   public renderEditPage = async (req: IRequest, res: Response) => {
     const admin = req.session.admin;
     const id = req.params.id;
 
-    const leadership = await this.repo.getById(id);
+    const gallery = await this.repo.getById(id);
 
-    res.render("admin/leadership/edit", {
-      title: "Boshqaruv paneli - Rahbariyat a'zosi ma'lumotlarini tahrirlash",
-      pageTitle: "Rahbariyat tahrirlash",
-      activeUrl: "/admin/leadership",
+    res.render("admin/galleries/edit", {
+      title: "Boshqaruv paneli - Fotosuratni tahrirlash",
+      pageTitle: "Fotosuratni tahrirlash",
+      activeUrl: "/admin/galleries",
       admin,
       updateErr: req.flash("updateErr")[0],
-      leadership,
+      gallery,
     });
   };
 
   public edit = async (req: IRequest, res: Response) => {
     const id = req.params.id;
 
-    const data: Partial<ILeadership> = {};
-    const { fullName, position, isLeader, description } = req.body;
+    const data: Partial<IGallery> = {};
+    const { title, description } = req.body;
 
-    const leadership = await this.repo.getById(id);
+    const gallery = await this.repo.getById(id);
 
-    if (fullName) data.fullName = fullName;
-    if (position) data.position = position;
-    if (isLeader) data.isLeader = isLeader === "on";
+    if (title) data.title = title;
     if (description) data.description = description;
 
     if (req.file) {
       const oldImagePath = path.join(
         __dirname,
-        `../../../public${leadership.image}`
+        `../../../public${gallery.image}`
       );
 
       fs.unlinkSync(oldImagePath);
 
-      data.image = `/uploads/leaderships/${req.file.filename}`;
+      data.image = `/uploads/galleries/${req.file.filename}`;
     }
 
     await this.repo.updateById(id, data);
 
-    res.redirect("/admin/leadership");
+    res.redirect("/admin/galleries");
   };
 
   public delete = async (req: IRequest, res: Response) => {
     const id = req.params.id;
 
-    const leadership = await this.repo.getById(id);
+    const gallery = await this.repo.getById(id);
     const oldImagePath = path.join(
       __dirname,
-      `../../../public${leadership.image}`
+      `../../../public${gallery.image}`
     );
     fs.unlinkSync(oldImagePath);
 
     await this.repo.deleteById(id);
 
-    res.redirect("/admin/leadership");
+    res.redirect("/admin/galleries");
   };
 }
 
-export default LeadershipService;
+export default GalleryService;

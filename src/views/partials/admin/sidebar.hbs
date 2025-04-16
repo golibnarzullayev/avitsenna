@@ -19,6 +19,12 @@
          </a>
       </li>
       <li class="nav-item">
+         <a class="{{#ifEquals activeUrl '/admin/galleries'}} nav-link {{else}} nav-link collapsed {{/ifEquals}}" href="/admin/galleries">
+          <i class='bx bx-photo-album'></i>
+            <span>Fotosuratlar</span>
+         </a>
+      </li>
+      <li class="nav-item">
          {{!-- <a class="{{#ifEquals activeUrl '/admin/directions'}} nav-link {{else}} nav-link collapsed {{/ifEquals}}" href="/admin/directions">
            <i class='bx bxs-graduation'></i>
             <span>Yo'nalishlar</span>

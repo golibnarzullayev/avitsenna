@@ -9,12 +9,6 @@
       --section-bg: #f9fbfd;
     }
     
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: var(--text-dark);
-      background-color: var(--section-bg);
-    }
-    
     /* Header Section */
     .news-header {
       background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 100%), url('assets/img/virtual-tour-2.jpg');
@@ -327,7 +321,7 @@
           {{!-- </div> --}}
           <div class="card-body">
             <div class="news-date mt-3">
-              <i class="bi bi-calendar3"></i> {{#formatDate createdAt}}{{/formatDate}}
+              <i class="bi bi-calendar3"></i> {{formatDate createdAt}}
             </div>
             <h5 class="card-title">{{title}}</h5>
             <p class="card-text">{{shortDescription}}</p>

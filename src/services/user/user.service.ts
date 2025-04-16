@@ -2,10 +2,12 @@ import { OrderBy } from "@/enums/mongo-query.enum";
 import { NewsStatus } from "@/enums/news-status.enum";
 import { IPagedResult, IRequest } from "@/interfaces";
 import { IClasses } from "@/interfaces/classes.interface";
+import { IGallery } from "@/interfaces/gallery.interface";
 import { ILeadership } from "@/interfaces/leadership.interface";
 import { INews } from "@/interfaces/news.interface";
 import { ApplicationRepo } from "@/repository/application.repo";
 import { ClassesRepo } from "@/repository/classes.model";
+import { GalleryRepo } from "@/repository/gallery.repo";
 import { LeadershipRepo } from "@/repository/leadership.repo";
 import { NewsRepo } from "@/repository/news.repo";
 import MongoQueryService from "@/utils/mongo-query.util";
@@ -16,6 +18,7 @@ class UserService {
   private classesRepo = new ClassesRepo();
   private leadershipRepo = new LeadershipRepo();
   private applicationRepo = new ApplicationRepo();
+  private galleryRepo = new GalleryRepo();
 
   public renderHomePage = async (req: IRequest, res: Response) => {
     const news = await this.newsRepo.getMany(
@@ -126,6 +129,22 @@ class UserService {
       shortDescription: news.shortDescription,
       imageUrl: `https://avitsennamaktabi.uz/${news.image}`,
       blogUrl: `https://avitsennamaktabi.uz/news/${news.slug}`,
+    });
+  };
+
+  public renderGalleriesPage = async (req: IRequest, res: Response) => {
+    const pipeline = new MongoQueryService({ ...req.query, limit: "all" })
+      .paginating()
+      .sorting("createdAt", OrderBy.Desc)
+      .getPipeline();
+
+    const result = await this.galleryRepo.aggregate<IPagedResult<IGallery>>(
+      pipeline
+    );
+
+    res.render("gallery", {
+      title: "Avitsenna School — Fotosuratlar.",
+      galleries: result.data,
     });
   };
 

@@ -25,6 +25,10 @@ class UserController {
     this.service.renderSingleNewsPage(req, res);
   };
 
+  public renderGalleriesPage = async (req: IRequest, res: Response) => {
+    this.service.renderGalleriesPage(req, res);
+  };
+
   public applications = async (req: IRequest, res: Response) => {
     this.service.applications(req, res);
   };

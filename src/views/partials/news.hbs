@@ -191,7 +191,7 @@
         <div class="card-img-overlay">
             <h3 class="card-title">{{latest.title}}</h3>
             <p class="card-text">{{latest.shortDescription}}</p>
-            <p class="card-date"><i class="bi bi-calendar3"></i> {{#formatDate latest.createdAt}} {{/formatDate}}</p>
+            <p class="card-date"><i class="bi bi-calendar3"></i> {{formatDate latest.createdAt}}</p>
         </div>
     </div>
     </a>
@@ -207,7 +207,7 @@
                 </div>
                 <div class="card-body">
                     <div class="card-date mt-3">
-                        <i class="bi bi-calendar3"></i> {{#formatDate createdAt}} {{/formatDate}}
+                        <i class="bi bi-calendar3"></i> {{formatDate createdAt}}
                     </div>
                     <h5 class="card-title">{{title}}</h5>
                     <p class="card-text">{{shortDescription}}</p>

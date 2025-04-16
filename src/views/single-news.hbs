@@ -265,7 +265,7 @@
                 <div class="news-header">
                     <h1 class="news-title">{{title}}</h1>
                     <div class="news-meta">
-                        <span><i class="bi bi-calendar"></i> {{#formatDate news.createdAt}}{{/formatDate}}</span>
+                        <span><i class="bi bi-calendar"></i> {{formatDate news.createdAt}}</span>
                         <span><i class="bi bi-eye"></i> {{news.views}} o'qildi</span>
                     </div>
                     <div class="news-image-container">
@@ -290,7 +290,7 @@
                         </div>
                         <div class="news-stats-item">
                             <i class="bi bi-calendar"></i>
-                            <span>{{#formatDate news.createdAt}}{{/formatDate}}</span>
+                            <span>{{formatDate news.createdAt}}</span>
                         </div>
                     </div>
 
@@ -319,7 +319,7 @@
                     <img src="{{image}}" alt="News thumbnail" class="rounded" style="object-fit: cover; width: 80px; height: 80px;">
                     <div class="ms-3">
                         <h6 class="mb-1 text-dark">{{title}}</h6>
-                        <p class="text-muted mb-0"><small>{{#formatDate createdAt}}{{/formatDate}}</small></p>
+                        <p class="text-muted mb-0"><small>{{formatDate createdAt}}</small></p>
                     </div>
                 </a>
                 {{/each}}

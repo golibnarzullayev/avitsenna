@@ -28,7 +28,7 @@ export class SeedService {
       console.log(`password => ${password}`);
       console.log("----------------------");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 }

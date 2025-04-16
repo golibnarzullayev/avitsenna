@@ -22,6 +22,10 @@ class UserRoute {
       `${this.path}/news/slug`,
       this.controller.renderSingleNewsPage
     );
+    this.router.get(
+      `${this.path}/galleries`,
+      this.controller.renderGalleriesPage
+    );
     this.router.post(`${this.path}/applications`, this.controller.applications);
   }
 }
