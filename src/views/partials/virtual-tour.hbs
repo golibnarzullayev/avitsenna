@@ -1,0 +1,57 @@
+<style>
+  .virtual-tour { padding: 60px 0; }
+  .virtual-tour-1{
+    background-image: url('assets/img/virtual-tour.jpg');
+    background-size: cover;
+    height: 500px;
+    border-radius: 10px;
+    background-clip: padding-box;
+  }
+
+  .virtual-tour-2 {
+    background-image: url('assets/img/virtual-tour-2.jpg');
+    background-size: cover;
+    height: 500px;
+    border-radius: 10px;
+    background-clip: padding-box;
+  }
+
+  @media only screen and (max-width: 991px) {
+    .virtual-tour-2 {
+      background-position: -200px;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="virtual-tour">
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-12 mb-3 mb-lg-0">
+        <div class="virtual-tour-1"></div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <h2 class="fw-bold">Maktab haqida</h2>
+        <p>Eng yuqori standartlarga javob beradigan zamonaviy taʼlim bizning
+          maqsadimiz. Maktabda ta’lim dasturi milliy va xalqaro andozalarga mos
+          tarzda tuzilgan bo’lib, isteʼdod va qiziqishlaringiz uchun imkoniyat
+          yaratadi. Pedagogik jamoamiz oʼz bilim va tajribalarini siz bilan
+          baham koʼrishga tayyor. Avitsenna School sifatli ta’lim berish bilan
+          birgalikda sizni o’z sohasining yetuk mutaxassisi bo’lishingizni
+          kafolatlaydi.Ustuvor maqsadimiz- yuqori saviyali kadrlar tayyorlash!</p>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-lg-6 col-12 order-lg-2 order-1 mb-3 mb-lg-0">
+        <div class="virtual-tour-2"></div>
+      </div>
+      <div class="col-lg-6 col-12 order-lg-1 order-2">
+        <h2 class="fw-bold">Hujjat topshirish</h2>
+        <p>Biz o'quvchilarga nafaqat o‘z karyeralarida muvaffaqiyatga erishishlari
+          uchun ta’lim va tajriba beramiz. Balki biz ularga o’z karyeralarida
+          muvaffaqiyat qozonishlariga yordam beramiz – ularda ishtiyoq paydo
+          bo’lgan sohani kashf qilamiz va uni boshqarishga ko`maklashamiz.</p>
+        <a class="btn btn-dark" href="#applications">Hujjat topshirish</a>
+      </div>
+    </div>
+  </div>
+</div>

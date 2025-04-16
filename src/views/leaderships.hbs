@@ -1,0 +1,178 @@
+
+<style>
+  :root {
+    --primary-color: #2d46c1;
+    --accent-color: #f7b731;
+    --light-bg: #f8f9fa;
+    --dark-text: #343a40;
+  }
+
+   .news-header {
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 100%), url('assets/img/virtual-tour-2.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 5rem 0;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .news-header h1 {
+      font-weight: 700;
+      font-size: 3rem;
+      letter-spacing: -0.5px;
+    }
+    
+    .news-header p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+        
+    .section-title {
+        position: relative;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        text-align: center;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background-color: var(--accent-color);
+        border-radius: 5px;
+    }
+    
+    .team-card {
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        transition: all 0.4s ease;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        background: white;
+        height: 100%;
+    }
+    
+    .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+    
+    .team-card .card-img-top {
+        height: 280px;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+    }
+    
+    .team-card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+    
+    .team-card .card-body {
+        padding: 25px;
+    }
+    
+    .team-card .card-title {
+        font-weight: 700;
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+        color: var(--primary-color);
+    }
+    
+    .team-card .position-badge {
+        background-color: rgba(45, 70, 193, 0.1);
+        color: var(--primary-color);
+        padding: 5px 15px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+    
+    .leader-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 30px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(247, 183, 49, 0.3);
+    }
+    
+    .date-info {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .main-leader {
+        position: relative;
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 50px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    
+    .main-leader-content {
+        padding: 30px;
+    }
+    
+    .main-leader-img {
+        height: 100%;
+        min-height: 400px;
+        object-fit: cover;
+    }
+    
+    @media (max-width: 992px) {
+        .main-leader-img {
+            height: 350px;
+            width: 100%;
+        }
+    }
+</style>
+{{> navbar}}
+
+<header class="news-header text-center">
+  <div class="container">
+    <h1 data-aos="fade-up">Avitsenna maktabidagi sinflar</h1>
+    <p data-aos="fade-up" data-aos-delay="100">Maktabimizda sinflar bilan tanishing</p>
+  </div>
+</header>
+
+
+
+<section class="container mb-4">
+
+  
+  <div class="row g-4">
+    {{#each leaderships}}
+      <div class="col-lg-4 col-md-6">
+        <div class="card team-card">
+          <div class="position-relative">
+            <img src="{{image}}" class="card-img-top" alt="Kamola Abdullayeva">
+            <div class="leader-badge">{{#ifEquals isLeader true}} Rahbar {{else}} O'qituvchi {{/ifEquals}}</div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">{{fullName}}</h3>
+            <div class="position-badge">{{position}}</div>
+            <p class="card-text">{{description}}</p>
+          </div>
+        </div>
+      </div>
+    {{/each}}  
+  </div>
+</section>
+{{> footer}}

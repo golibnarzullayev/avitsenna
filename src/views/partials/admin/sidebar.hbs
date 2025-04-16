@@ -1,0 +1,46 @@
+<aside id="sidebar" class="sidebar">
+   <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+         <a class="{{#ifEquals activeUrl '/admin/dashboard'}} nav-link {{else}} nav-link collapsed {{/ifEquals}}"href="/admin/dashboard">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+         </a>
+      </li>
+      <li class="nav-item">
+         <a class="{{#ifEquals activeUrl '/admin/leadership'}} nav-link {{else}} nav-link collapsed {{/ifEquals}}" href="/admin/leadership">
+           <i class='bx bx-globe'></i>
+            <span>Rahbariyat</span>
+         </a>
+      </li>
+      <li class="nav-item">
+         <a class="{{#ifEquals activeUrl '/admin/classes'}} nav-link {{else}} nav-link collapsed {{/ifEquals}}" href="/admin/classes">
+           <i class='bx bxs-graduation'></i>
+            <span>Sinflar</span>
+         </a>
+      </li>
+      <li class="nav-item">
+         {{!-- <a class="{{#ifEquals activeUrl '/admin/directions'}} nav-link {{else}} nav-link collapsed {{/ifEquals}}" href="/admin/directions">
+           <i class='bx bxs-graduation'></i>
+            <span>Yo'nalishlar</span>
+         </a>
+      </li> --}}
+      <li class="nav-item">
+         <a class="{{#ifEquals activeUrl '/admin/news'}} nav-link {{else}} nav-link collapsed {{/ifEquals}}" href="/admin/news">
+            <i class='bx bx-news'></i>
+            <span>Yangiliklar</span>
+         </a>
+      </li>
+      <li class="nav-item">
+         <a class="{{#ifEquals activeUrl '/admin/applications'}} nav-link {{else}} nav-link collapsed {{/ifEquals}}" href="/admin/applications">
+            <i class='bx bxs-notification'></i>
+            <span>Arizalar</span>
+         </a>
+      </li>
+      <li class="nav-item">
+         <a class="{{#ifEquals activeUrl '/admin/logout'}} nav-link {{else}} nav-link collapsed {{/ifEquals}}" href="/admin/logout">
+            <i class='bx bx-log-out-circle' ></i>
+            <span>Chiqish</span>
+         </a>
+      </li>
+   </ul>
+</aside>

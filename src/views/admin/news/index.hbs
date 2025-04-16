@@ -1,0 +1,123 @@
+{{> admin/header}}
+{{> admin/sidebar}}
+<main id="main" class="main">
+   {{> admin/pageTitle}}
+   <section class="section dashboard">
+      <div class="row">
+         <div class="col-12">
+            <div class="card">
+               <div class="card-header">
+                  <a href="/admin/news/add" class="btn btn-primary">
+                     Qo'shish
+                  </a>
+               </div>
+               <div class="card-body p-3">
+                  {{#if news}}
+                     <div class="table-responsive text-center">
+                        <table class="table table-hover table-striped table-bordered">
+                           <thead>
+                              <tr>
+                                 <th>ID</th>
+                                 <th>Sarlavha</th>
+                                 <th>Yangilik havolasi</th>
+                                 <th>Ko'rishlar soni</th>
+                                 <th>Yaratilgan vaqt</th>
+                                 <th>Funksiyalar</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              {{#each news}}
+                                 <tr>
+                                    <td>{{postId}}</td>
+                                    <td class="newsTitle-column">{{title}}</td>
+                                    <td>
+                                       <a class="badge bg-primary" href="/p/{{postId}}" target="_blank">
+                                          Ko'rish
+                                       </a>
+                                    </td>
+                                    <td>
+                                       <div class="badge bg-info">{{views}}</div>
+                                    </td>
+                                    <td class="date-column">{{formatDate createdAt}}</td>
+                                    <td>
+                                       <span type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                          <i class="bi bi-three-dots-vertical fs-4"></i>
+                                       </span>
+
+                                       <ul class="dropdown-menu">
+                                          <li>
+                                             <span type="button" class="dropdown-item text-danger delete-btn me-2" data-id="{{_id}}">
+                                                O'chirish
+                                             </span>
+                                          </li>
+                                          <li>
+                                             <a href="/admin/news/edit/{{_id}}" class="dropdown-item text-info">
+                                                Tahrirlash
+                                             </a>
+                                          </li>
+                                       </ul>
+                                    </td>
+                                 </tr>
+                              {{/each}}
+                           </tbody>
+                        </table>
+                     </div>
+                     {{#ifMax pageCount 1}}
+                        <nav aria-label="Page navigation example">
+                           <ul class="pagination">
+                              {{#paginate pagination type="previous"}}
+                                 <li class="page-item {{#if disabled}} disabled {{/if}}">
+                                    <a class="page-link" href="?page={{n}}" style="font-size: 24px;">
+                                       <i class='bx bx-chevrons-left'></i>
+                                    </a>
+                                 </li>
+                              {{/paginate}}
+                              {{#paginate pagination type="next"}}
+                                 <li class="page-item {{#if disabled}} disabled {{/if}}">
+                                    <a class="page-link" href="?page={{n}}" style="font-size: 24px;">
+                                       <i class='bx bx-chevrons-right'></i>
+                                    </a>
+                                 </li>
+                              {{/paginate}}
+                           </ul>
+                        </nav>
+                     {{/ifMax}}
+                  {{else}}
+                     <div class="alert alert-danger text-center fs-5">
+                        Yangiliklar mavjud emas
+                     </div>
+                  {{/if}}
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+</main>
+
+<script>
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+
+    deleteButtons.forEach(deleteButton => {
+        const id = deleteButton.getAttribute('data-id');
+        deleteButton.addEventListener('click', () => {
+            const confirm = window.confirm("Rostan o'chirmoqchimisiz?");
+
+            if (confirm) {
+                fetch(`/admin/news/delete/${id}`, {
+                    method: 'POST'
+                }).then(() => {
+                    Toastify({
+                        text: "Muvaffaqqiyatli o'chirildi",
+                        className: "info",
+                        style: {
+                            background: "green",
+                        },
+                        duration: 1500,
+                    }).showToast();
+
+                    setTimeout(() => window.location.reload(), 1500);
+                })
+            }
+        })
+    })
+</script>

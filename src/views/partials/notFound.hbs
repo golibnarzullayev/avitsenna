@@ -1,0 +1,24 @@
+<style>
+  #error-404 { min-height: calc(100vh - 335px); display: flex; align-items:
+  center; justify-content: center; flex-direction: column; padding: 30px;
+  text-align: center; } .error-404 h1 { font-size: 160px; font-weight: 700;
+  color: #061ED5; margin-bottom: 0; line-height: 150px; } .error-404 h2 {
+  font-size: 24px; font-weight: 700; color: #012970; margin-bottom: 30px; }
+  .error-404 .btn { background: #061ED5; color: #fff; padding: 12px 30px;
+  border-radius: 5px; }
+</style>
+
+<section class="section error-404" id="error-404">
+  <h1>404</h1>
+  {{#if pageErr}}
+    <h2>Sahifa topilmadi</h2>
+  {{else}}
+    <h2>Yangiliklar mavjud emas</h2>
+  {{/if}}
+  <a class="btn" href="/">Asosiy sahifa</a>
+</section>
+
+<script>
+  if (window.innerWidth < 993) { const minHeight = 'calc(100vh - 250px)'
+  document.getElementById('error-404').style.minHeight = minHeight; }
+</script>

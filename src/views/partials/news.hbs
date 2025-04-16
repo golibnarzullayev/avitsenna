@@ -1,0 +1,222 @@
+<style>
+  .section-title {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            text-align: center;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #0d6efd;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .news-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            height: 100%;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .news-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .news-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .news-card .card-img-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .news-card .card-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 15px;
+            background-color: #0d6efd;
+            color: white;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .news-card .card-date {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .news-card .card-date i {
+            margin-right: 5px;
+        }
+        
+        .news-card .card-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .news-card .card-text {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .news-card .card-footer {
+            background-color: transparent;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding: 1rem 1.25rem;
+        }
+        
+        .news-card .read-more {
+            display: flex;
+            align-items: center;
+            color: #0d6efd;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .news-card .read-more i {
+            margin-left: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .news-card .read-more:hover {
+            color: #0a58ca;
+        }
+        
+        .news-card .read-more:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Featured card styles */
+        .featured-card {
+            margin-bottom: 25px;
+        }
+        
+        .featured-card .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .featured-card .card-img-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+        }
+        
+        .featured-card .card-title {
+            color: white;
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .featured-card .card-text {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .featured-card .card-date {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .featured-card .card-date i {
+            margin-right: 5px;
+        }
+
+        @media only screen and (max-width:574px) {
+          .featured-card .card-text {
+            display: none;
+          }
+
+          .featured-card .card-title {
+            font-size: 1.4rem;
+          }
+        }
+</style>
+
+<div class="container">
+  <h2 class="section-title">SO'NGGI YANGILIKLAR</h2>
+
+  {{#if latest}}
+  <a href="/news/{{latest.slug}}" class="featured-card mb-5">
+    <div class="card text-white">
+        <img src="{{latest.image}}" class="card-img" alt="Featured News">
+        <div class="card-img-overlay">
+            <h3 class="card-title">{{latest.title}}</h3>
+            <p class="card-text">{{latest.shortDescription}}</p>
+            <p class="card-date"><i class="bi bi-calendar3"></i> {{#formatDate latest.createdAt}} {{/formatDate}}</p>
+        </div>
+    </div>
+    </a>
+  {{/if}}
+
+  <div class="row g-4">
+        <!-- News Card 1 -->
+      {{#each news}}
+      <div class="col-lg-4 col-md-6">
+            <div class="card news-card">
+                <div class="card-img-wrapper">
+                    <img src="{{image}}" class="card-img-top" alt="News Image">
+                </div>
+                <div class="card-body">
+                    <div class="card-date mt-3">
+                        <i class="bi bi-calendar3"></i> {{#formatDate createdAt}} {{/formatDate}}
+                    </div>
+                    <h5 class="card-title">{{title}}</h5>
+                    <p class="card-text">{{shortDescription}}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="/news/{{slug}}" class="read-more">Batafsil <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+      {{/each}}
+  </div>
+</div>

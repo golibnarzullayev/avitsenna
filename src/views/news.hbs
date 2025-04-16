@@ -1,0 +1,401 @@
+<style>
+    :root {
+      --primary-color: #3a86ff;
+      --secondary-color: #4361ee;
+      --accent-color: #4cc9f0;
+      --text-dark: #2b2d42;
+      --text-light: #6c757d;
+      --white: #ffffff;
+      --section-bg: #f9fbfd;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-dark);
+      background-color: var(--section-bg);
+    }
+    
+    /* Header Section */
+    .news-header {
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 100%), url('assets/img/virtual-tour-2.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 5rem 0;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .news-header h1 {
+      font-weight: 700;
+      font-size: 3rem;
+      letter-spacing: -0.5px;
+    }
+    
+    .news-header p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    /* News Card Styles */
+    .news-card {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+      height: auto;
+      overflow: hidden;
+    }
+    
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+    
+    .card-img-container {
+      position: relative;
+      height: 450px;
+    }
+    
+    .card-img-top {
+      width: 100%;
+      height: 80%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .news-card:hover .card-img-top {
+      transform: scale(1.05);
+    }
+    
+    .card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+      padding: 20px;
+      color: white;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .news-card:hover .card-overlay {
+      transform: translateY(0);
+    }
+    
+    .news-category {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .news-date {
+      display: flex;
+      align-items: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    
+    .news-date i {
+      margin-right: 5px;
+      color: var(--primary-color);
+    }
+    
+    .card-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      color: var(--text-dark);
+    }
+    
+    .card-text {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      color: var(--primary-color);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .read-more i {
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+    
+    .read-more:hover {
+      color: var(--secondary-color);
+    }
+    
+    .read-more:hover i {
+      transform: translateX(3px);
+    }
+    
+    /* Filter Buttons */
+    .filter-buttons {
+      margin-bottom: 2rem;
+    }
+    
+    .filter-btn {
+      background-color: transparent;
+      border: 1px solid #e0e0e0;
+      color: var(--text-dark);
+      border-radius: 30px;
+      padding: 8px 20px;
+      margin: 0 5px 10px;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+    }
+    
+    /* Pagination Styling */
+    .pagination {
+      justify-content: center;
+      margin-top: 3rem;
+      margin-bottom: 2rem;
+    }
+    
+    .page-item {
+      margin: 0 5px;
+    }
+    
+    .page-link {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dark);
+      border-radius: 50% !important;
+      border: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .page-link:hover {
+      background-color: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .page-item.active .page-link {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    }
+    
+    /* Search Section */
+    .search-container {
+      position: relative;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+    
+    .search-container input {
+      padding: 12px 20px 12px 45px;
+      border-radius: 30px;
+      border: 1px solid #e0e0e0;
+      background-color: white;
+      width: 100%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .search-container input:focus {
+      box-shadow: 0 5px 20px rgba(67, 97, 238, 0.15);
+      border-color: var(--primary-color);
+      outline: none;
+    }
+    
+    .search-container i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+    }
+
+    .no-results-container {
+      background-color: white;
+      border-radius: 15px;
+      padding: 3rem 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    .no-results-container i {
+      font-size: 4rem;
+      color: var(--primary-color);
+      opacity: 0.7;
+    }
+
+    .no-results-container .btn {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--white);
+      border: none;
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+  
+    .no-results-container .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+      color: var(--white);
+    }
+    
+    @media (max-width: 768px) {
+      .news-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .filter-buttons {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 10px;
+        margin-bottom: 1.5rem;
+      }
+      
+      .filter-btn {
+        margin-bottom: 0;
+      }
+      
+      .news-card {
+        height: auto;
+      }
+
+      .card-img-container {
+        height: 200px;
+      }
+    }
+  </style>
+
+{{> navbar}}
+
+<header class="news-header text-center">
+  <div class="container">
+    <h1 data-aos="fade-up">Avitsenna maktabi yangiliklari</h1>
+    <p data-aos="fade-up" data-aos-delay="100">Maktabimizda sodir bo'layotgan eng so'nggi yangiliklar, tadbirlar va yutuqlar haqida bilib oling</p>
+  </div>
+</header>
+
+<div class="container">
+  <!-- Search -->
+  <div class="search-container" data-aos="fade-up">
+    <i class="bi bi-search"></i>
+    <form action="/news">
+      <input type="text" class="form-control" name="search" placeholder="Yangiliklar bo'yicha qidirish...">
+    </form>
+  </div>
+  
+  <!-- News Cards -->
+  {{#if news}}
+    <div class="row">
+    <!-- News Card 1 -->
+      {{#each news}}
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="card news-card">
+          {{!-- <div class="card-img-container"> --}}
+            <img src="{{image}}" class="card-img-top" alt="{{title}}">
+          {{!-- </div> --}}
+          <div class="card-body">
+            <div class="news-date mt-3">
+              <i class="bi bi-calendar3"></i> {{#formatDate createdAt}}{{/formatDate}}
+            </div>
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">{{shortDescription}}</p>
+            <a href="/news/{{slug}}" class="read-more">Batafsil <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  
+  <!-- Pagination -->
+  {{#ifMax pageCount 1}}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          {{#paginate pagination type="previous"}}
+              <li class="page-item {{#if disabled}} disabled {{/if}}">
+                <a class="page-link" href="?page={{n}}" style="font-size: 24px;">
+                    <i class='bx bx-chevrons-left'></i>
+                </a>
+              </li>
+          {{/paginate}}
+          {{#paginate pagination type="next"}}
+              <li class="page-item {{#if disabled}} disabled {{/if}}">
+                <a class="page-link" href="?page={{n}}" style="font-size: 24px;">
+                    <i class='bx bx-chevrons-right'></i>
+                </a>
+              </li>
+          {{/paginate}}
+        </ul>
+    </nav>
+  {{/ifMax}}
+  {{else}}
+    <div class="no-results-container text-center my-5 py-5" id="noResultsContainer">
+      <div data-aos="fade-up" class="py-4">
+        <i class="bi bi-search"></i>
+        <h3 class="mt-4 mb-3">Yangiliklar topilmadi</h3>
+        <p class="text-muted mb-4 mx-auto" style="max-width: 500px;">
+          Qidiruv so'rovingiz yoki tanlangan filtrlarga mos yangiliklar topilmadi. Boshqa kalit so'zlardan foydalanib ko'ring
+        </p>
+        <a href="/news" class="btn btn-primary px-4 py-2 rounded-pill">
+          Barcha yangiliklarni ko'rsatish
+        </a>
+      </div>
+    </div>
+  {{/if}}
+</div>
+
+{{> footer}}
+<script>
+  // Animatsiyalarni ishga tushirish
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true
+  });
+  
+  // Filter tugmalarni ishga tushirish
+  document.querySelectorAll('.filter-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      // Barcha aktiv klasslarni olib tashlash
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Bosilgan tugmani aktiv qilish
+      this.classList.add('active');
+      
+      // Bu yerda kerakli filterlar qo'shilishi mumkin
+    });
+  });
+</script>

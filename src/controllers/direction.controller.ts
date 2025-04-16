@@ -1,0 +1,65 @@
+import { IRequest } from "@/interfaces";
+import DirectionService from "@/services/direction/direction.service";
+import { Response } from "express";
+
+class DirectionController {
+  private service = new DirectionService();
+
+  public renderHomePage = async (req: IRequest, res: Response) => {
+    try {
+      await this.service.renderHomePage(req, res);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  public renderAddPage = async (req: IRequest, res: Response) => {
+    try {
+      this.service.renderAddPage(req, res);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  public create = async (req: IRequest, res: Response) => {
+    try {
+      this.service.create(req, res);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  public renderEditPage = async (req: IRequest, res: Response) => {
+    try {
+      this.service.renderEditPage(req, res);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  public edit = async (req: IRequest, res: Response) => {
+    try {
+      this.service.edit(req, res);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  public delete = async (req: IRequest, res: Response) => {
+    try {
+      this.service.delete(req, res);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  public updateStatus = async (req: IRequest, res: Response) => {
+    try {
+      this.service.updateStatus(req, res);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+}
+
+export default DirectionController;

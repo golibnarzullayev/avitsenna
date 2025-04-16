@@ -1,0 +1,61 @@
+{{> admin/header}}
+{{> admin/sidebar}}
+<main id="main" class="main">
+   {{> admin/pageTitle}}
+   <section class="section dashboard">
+      <div class="row">
+         <div class="col-12">
+            <div class="card">
+               {{#if addErr}}
+                  <div class="card-header">
+                     <div class="alert alert-danger">{{addErr}}</div>
+                  </div>
+               {{/if}}
+               {{#if classes}}
+               <div class="card-body p-3">
+                  <form action="/admin/classes/edit/{{classes._id}}" method="post" class="row needs-validation" novalidate enctype="multipart/form-data">
+                     <div class="col-12 has-validation mb-3">
+                        <label for="title" class="form-label card-title p-0">
+                          Sinf
+                        </label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="10-A sinf" required value="{{classes.title}}">
+                        <div class="invalid-feedback">Iltimos, sinf nomini kiriting</div>
+                     </div>
+                     <div class="col-12 has-validation mb-3">
+                        <label for="image" class="form-label card-title p-0">
+                          Rasmi
+                        </label>
+                        <input type="file" class="form-control" name="image" id="image">
+                        <div class="invalid-feedback">Iltimos, rasm tanlang</div>
+                    </div>
+                    <div class="col-12 has-validation mb-3">
+                        <label for="teacherId" class="form-label card-title p-0">
+                           O'qituvchilar
+                        </label>
+                        <select required name="teacherId" id="teacherId" class="form-select">
+                          {{#select classes.teacher._id}}
+                          <option value="">Tanlang</option>
+                          {{#each teachers}}
+                              <option value="{{_id}}">{{fullName}}</option>
+                           {{/each}}
+                          {{/select}}
+                        </select>
+                        <div class="invalid-feedback">Iltimos, o'qituvchini tanlang</div>
+                     </div>
+                     <div class="col-lg-12">
+                        <button class="btn btn-primary">
+                           Saqlash
+                        </button>
+                     </div>
+                  </form>
+               </div>
+               {{/if}}
+            </div>
+         </div>
+      </div>
+   </section>
+</main>
+
+<script>
+  document.getElementById('teacherId').value = {{classes.teacher._id}};
+</script>

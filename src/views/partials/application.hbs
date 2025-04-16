@@ -1,0 +1,350 @@
+<style>
+  .registration-container {
+            margin: 80px auto;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            padding: 0;
+        }
+        
+        .form-section {
+            padding: 40px;
+        }
+        
+        .illustration-section {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px 0 0 20px;
+            overflow: hidden;
+            padding: 30px;
+        }
+        
+        .illustration-section img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .form-control {
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            background-color: #f8f9fa;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #707070;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+        
+        .intl-tel-input {
+            width: 100%;
+        }
+        
+        .submit-btn {
+            background-color: #212529;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        
+        .phone-note {
+            font-size: 0.75rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 5px;
+        }
+        
+        .is-invalid {
+            border-color: #dc3545;
+            padding-right: calc(1.5em + 0.75rem);
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+        }
+        
+        @media (max-width: 768px) {
+            .illustration-section {
+                height: 300px;
+                border-radius: 20px 20px 0 0;
+                margin-bottom: 20px;
+            }
+            
+            .form-section {
+                padding: 30px 20px;
+            }
+        }
+</style>
+
+<div class="container" id="applications">
+  <div class="row registration-container shadow-sm">
+    <div class="col-lg-6 p-0">
+      <div class="illustration-section">
+        <img
+          src="assets/img/illustrator.png"
+          alt="Registration illustration"
+          class="d-none d-lg-block"
+        />
+        <!-- Mobile illustration -->
+        <img
+          src="assets/img/illustrator.png"
+          alt="Registration illustration"
+          class="d-block d-lg-none"
+        />
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-section">
+        <h2 class="form-title">O'quvchi bo`lish uchun ariza qoldiring</h2>
+
+        <form id="registration-form" class="needs-validation" novalidate>
+          <div class="row mb-3">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <label for="first-name" class="form-label">ISM</label>
+              <input
+                type="text"
+                class="form-control"
+                id="first-name"
+                placeholder="Ism"
+                name="firstName"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="last-name" class="form-label">FAMILIYA</label>
+              <input
+                type="text"
+                class="form-control"
+                id="last-name"
+                placeholder="Familiya"
+                name="lastName"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="father-name" class="form-label">OTASINING ISMI</label>
+            <input
+              type="text"
+              class="form-control"
+              id="father-name"
+              placeholder="Otasining ismi"
+              name="middleName"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+              <label for="phone" class="form-label">TELEFON RAQAMINGIZ</label>
+              <div class="input-group">
+                  <span class="input-group-text" id="phone-prefix">
+                      <img src="assets/img/uzb.svg" alt="Uzbekistan flag" height="15">
+                  </span>
+                  <input type="tel" class="form-control" id="phone" placeholder="998" aria-describedby="phone-prefix" required name="phone">
+              </div>
+              <p class="phone-note fst-italic">Faqat asosiy telefon raqamingizni kiriting</p>
+          </div>
+
+          <div class="mb-4">
+            <label for="age" class="form-label">YOSHINGIZNI KIRITING</label>
+            <input
+              type="number"
+              class="form-control"
+              id="age"
+              name="age"
+              placeholder="Yosh kiritish"
+              required
+            />
+          </div>
+
+          <div class="text-end">
+            <button type="submit" class="submit-btn">Yuborish</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.getElementById('phone');
+            const ageInput = document.getElementById('age');
+            const form = document.getElementById('registration-form');
+            
+            // Define Uzbekistan phone number regex pattern
+            // Format: 998 XX XXX XX XX or +998 XX XXX XX XX
+            const uzPhoneRegex = /^(\+?998)?[\s-]?([0-9]{2})[\s-]?([0-9]{3})[\s-]?([0-9]{2})[\s-]?([0-9]{2})$/;
+            const ageRegex = /^\d+$/;
+            // Function to format phone number as user types
+            phoneInput.addEventListener('input', function(e) {
+                // Remove all non-digit characters
+                let inputValue = e.target.value.replace(/\D/g, '');
+                
+                // Make sure it starts with 998 (Uzbekistan code)
+                if (!inputValue.startsWith('998') && inputValue.length > 0) {
+                    inputValue = '998' + inputValue;
+                }
+                
+                // Limit to maximum length of 12 digits (998XXXXXXXXX)
+                if (inputValue.length > 12) {
+                    inputValue = inputValue.slice(0, 12);
+                }
+                
+                // Format the number: 998 XX XXX XX XX
+                let formattedNumber = '';
+                if (inputValue.length > 0) {
+                    // Start with country code
+                    formattedNumber = inputValue.slice(0, 3);
+                    
+                    // Add operator code (2 digits)
+                    if (inputValue.length > 3) {
+                        formattedNumber += ' ' + inputValue.slice(3, 5);
+                    }
+                    
+                    // Add first part of subscriber number (3 digits)
+                    if (inputValue.length > 5) {
+                        formattedNumber += ' ' + inputValue.slice(5, 8);
+                    }
+                    
+                    // Add second part of subscriber number (2 digits)
+                    if (inputValue.length > 8) {
+                        formattedNumber += ' ' + inputValue.slice(8, 10);
+                    }
+                    
+                    // Add last part of subscriber number (2 digits)
+                    if (inputValue.length > 10) {
+                        formattedNumber += ' ' + inputValue.slice(10, 12);
+                    }
+                }
+                
+                // Update input value with formatted number
+                e.target.value = formattedNumber;
+                
+                // Validate the phone number
+                validatePhoneNumber();
+            });
+            
+            // Function to validate phone number
+            function validatePhoneNumber() {
+              const phoneValue = phoneInput.value.replace(/\s/g, '');
+              
+              if (phoneValue.length === 0) {
+                phoneInput.classList.remove('is-invalid');
+                return true;
+              }
+              
+              if (!uzPhoneRegex.test(phoneValue)) {
+                  phoneInput.classList.add('is-invalid');
+                  return false;
+              } else {
+                  phoneInput.classList.remove('is-invalid');
+                  return true;
+              }
+            }
+            
+            ageInput.addEventListener('input', function(e) {
+              let inputValue = e.target.value.replace(/\D/g, '');
+
+             if (!ageRegex.test(inputValue) || inputValue > 20) {
+                    ageInput.classList.add('is-invalid');
+                    return false;
+                } else {
+                    ageInput.classList.remove('is-invalid');
+                    return true;
+                } 
+            })
+
+            function validAge() {
+               const ageValue = ageInput.value.replace(/\s/g, '');
+                
+                if (ageValue.length === 0) {
+                    ageInput.classList.remove('is-invalid');
+                    return true;
+                }
+                
+                if (!ageRegex.test(ageValue)) {
+                    ageInput.classList.add('is-invalid');
+                    return false;
+                } else {
+                    ageInput.classList.remove('is-invalid');
+                    return true;
+                }
+            }
+            // Form submission validation
+            form.addEventListener('submit', function(e) {
+                e.preventDefault()
+
+                if (!validatePhoneNumber()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+
+                if (!validAge()) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
+                
+                form.classList.add('was-validated');
+
+                const confirm = window.confirm("Rostan ariza qoldirasizmi?");
+
+                const formData = new FormData(form)
+                const data = {};
+                formData.forEach((value, key) => {
+                  data[key] = value;
+                });
+
+                if (confirm) {
+                    fetch("/applications", {
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                    }).then(() => {
+                        Toastify({
+                            text: "Muvaffaqqiyatli ariza qoldirildi",
+                            className: "info",
+                            style: {
+                              background: "green",
+                            },
+                            duration: 1500,
+                        }).showToast();
+                        form.reset();
+
+                        setTimeout(() => window.location.reload(), 500);
+                    })
+                }
+            });
+        });
+    </script>

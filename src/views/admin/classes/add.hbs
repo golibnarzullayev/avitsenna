@@ -1,0 +1,50 @@
+{{> admin/header}}
+{{> admin/sidebar}}
+<main id="main" class="main">
+   {{> admin/pageTitle}}
+   <section class="section dashboard">
+      <div class="row">
+         <div class="col-12">
+            <div class="card">
+               {{#if addErr}}
+                  <div class="card-header">
+                     <div class="alert alert-danger">{{addErr}}</div>
+                  </div>
+               {{/if}}
+               <div class="card-body p-3">
+                  <form action="/admin/classes/add" method="post" class="row needs-validation" novalidate enctype="multipart/form-data">
+                     <div class="col-12 has-validation mb-3">
+                        <label for="title" class="form-label card-title p-0">
+                          Sinf
+                        </label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="10-A sinf" required>
+                     </div>
+                     <div class="col-12 has-validation mb-3">
+                        <label for="image" class="form-label card-title p-0">
+                          Rasmi
+                        </label>
+                        <input type="file" class="form-control" name="image" id="image" required>
+                    </div>
+                    <div class="col-12 has-validation mb-3">
+                        <label for="teacherId" class="form-label card-title p-0">
+                           O'qituvchilar
+                        </label>
+                        <select required name="teacherId" id="teacherId" class="form-select">
+                           <option value="">Tanlang</option>
+                           {{#each teachers}}
+                              <option value="{{_id}}">{{fullName}}</option>
+                           {{/each}}
+                        </select>
+                     </div>
+                     <div class="col-lg-12">
+                        <button class="btn btn-primary">
+                           Qo'shish
+                        </button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+</main>

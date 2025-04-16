@@ -1,0 +1,67 @@
+{{> admin/header}}
+{{> admin/sidebar}}
+<main id="main" class="main">
+   {{> admin/pageTitle}}
+   <section class="section dashboard">
+      <div class="row">
+         <div class="col-12">
+            <div class="card">
+               <div class="card-body p-3">
+                  {{#if applications}}
+                     <div class="table-responsive text-center">
+                        <table class="table table-hover table-striped table-bordered">
+                           <thead>
+                              <tr>
+                                 <th>Ism</th>
+                                 <th>Familiya</th>
+                                 <th>Otasining ismi</th>
+                                 <th>Yoshi</th>
+                                 <th>Telefon raqami</th>
+                                 <th>Qoldirilgan vaqti</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              {{#each applications}}
+                                 <tr>
+                                    <td>{{firstName}}</td>
+                                    <td>{{lastName}}</td>
+                                    <td>{{middleName}}</td>
+                                    <td>{{age}}</td>
+                                    <td>{{phone}}</td>
+                                    <td>{{#formatDate createdAt}}{{/formatDate}}</td>
+                                 </tr>
+                              {{/each}}
+                           </tbody>
+                        </table>
+                     </div>
+                     {{#ifMax pageCount 1}}
+                        <nav aria-label="Page navigation example">
+                           <ul class="pagination">
+                              {{#paginate pagination type="previous"}}
+                                 <li class="page-item {{#if disabled}} disabled {{/if}}">
+                                    <a class="page-link" href="?page={{n}}" style="font-size: 24px;">
+                                       <i class='bx bx-chevrons-left'></i>
+                                    </a>
+                                 </li>
+                              {{/paginate}}
+                              {{#paginate pagination type="next"}}
+                                 <li class="page-item {{#if disabled}} disabled {{/if}}">
+                                    <a class="page-link" href="?page={{n}}" style="font-size: 24px;">
+                                       <i class='bx bx-chevrons-right'></i>
+                                    </a>
+                                 </li>
+                              {{/paginate}}
+                           </ul>
+                        </nav>
+                     {{/ifMax}}
+                  {{else}}
+                     <div class="alert alert-danger text-center fs-5">
+                        Yangiliklar mavjud emas
+                     </div>
+                  {{/if}}
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+</main>
