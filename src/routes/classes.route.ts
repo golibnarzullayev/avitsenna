@@ -5,7 +5,7 @@ import { Router } from "express";
 
 class ClassesRoute {
   public path = "/admin/classes";
-  public router = Router();
+  public router: Router = Router();
   private controller = new ClassesController();
 
   constructor() {

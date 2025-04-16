@@ -5,7 +5,7 @@ import { Router } from "express";
 
 class NewsRoute {
   public path = "/admin/news";
-  public router = Router();
+  public router: Router = Router();
   private controller = new NewsController();
 
   constructor() {

@@ -4,7 +4,7 @@ import { Router } from "express";
 
 class AuthRoute {
   public path = "/auth";
-  public router = Router();
+  public router: Router = Router();
   private authController = new AuthController();
 
   constructor() {

@@ -5,7 +5,7 @@ import { Router } from "express";
 
 class DirectionRoute {
   public path = "/admin/directions";
-  public router = Router();
+  public router: Router = Router();
   private controller = new DirectionController();
 
   constructor() {

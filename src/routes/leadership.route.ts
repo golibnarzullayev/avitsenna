@@ -5,7 +5,7 @@ import { Router } from "express";
 
 class LeadershipRoute {
   public path = "/admin/leadership";
-  public router = Router();
+  public router: Router = Router();
   private controller = new LeadershipController();
 
   constructor() {

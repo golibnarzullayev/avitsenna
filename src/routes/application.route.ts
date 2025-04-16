@@ -4,7 +4,7 @@ import { Router } from "express";
 
 class ApplicationRoute {
   public path = "/admin/applications";
-  public router = Router();
+  public router: Router = Router();
   private controller = new ApplicationController();
 
   constructor() {

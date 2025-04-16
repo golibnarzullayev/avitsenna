@@ -3,7 +3,7 @@ import { Router } from "express";
 
 class UserRoute {
   public path = "";
-  public router = Router();
+  public router: Router = Router();
   private controller = new UserController();
 
   constructor() {
