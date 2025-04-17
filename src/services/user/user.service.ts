@@ -57,6 +57,7 @@ class UserService {
     const result = await this.newsRepo.aggregate<IPagedResult<INews>>(pipeline);
 
     res.render("news", {
+      title: "Avitsenna School — Yangiliklar.",
       news: result.data,
       pageCount: Math.ceil(result.resultCount / 10),
       pagination: {
