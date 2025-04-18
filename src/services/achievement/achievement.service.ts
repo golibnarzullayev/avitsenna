@@ -98,7 +98,9 @@ class AchievementService {
         `../../../public${achievement.image}`
       );
 
-      fs.unlinkSync(oldImagePath);
+      if (fs.existsSync(oldImagePath)) {
+        fs.unlinkSync(oldImagePath);
+      }
 
       data.image = `/uploads/achievements/${req.file.filename}`;
     }
@@ -116,7 +118,10 @@ class AchievementService {
       __dirname,
       `../../../public${achievement.image}`
     );
-    fs.unlinkSync(oldImagePath);
+
+    if (fs.existsSync(oldImagePath)) {
+      fs.unlinkSync(oldImagePath);
+    }
 
     await this.repo.deleteById(id);
 

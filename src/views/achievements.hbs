@@ -22,27 +22,64 @@
       opacity: 0.9;
     }
 
-   .achievement-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
-        }
-        .achievement-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .achievement-image {
-            height: 200px;
-            object-fit: cover;
-        }
-        .badge-corner {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-        .header-bg {
-            background: linear-gradient(to right, #3494e6, #ec6ead);
-            color: white;
-        }
+    .achievement-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+    
+    .achievement-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .achievement-image-wrapper {
+        text-align: center;
+        background-color: #f8f9fa;
+        padding: 10px;
+    }
+    
+    .achievement-image {
+        max-width: 100%;
+        max-height: 300px; /* Reduced height */
+        width: auto;
+    }
+    
+    .card-content {
+        padding: 15px;
+    }
+    
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    
+    .card-text {
+        color: #6c757d;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .card-footer {
+        padding: 10px 15px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+        font-size: 0.85rem;
+    }
+    
+    .badge-corner {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+    }
+    
+    .header-bg {
+        background: linear-gradient(to right, #3494e6, #ec6ead);
+        color: white;
+    }
 </style>
 
 {{> navbar}}
@@ -55,17 +92,22 @@
 </header>
 
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5" id="achievementsContainer">
+    <div class="row" id="achievementsContainer">
         {{#each achievements}}
-        <div class="card achievement-card position-relative">
-            <span class="badge bg-success badge-corner">Yutuq</span>
-            <img src="{{image}}" class="card-img-top achievement-image" alt="{{fullName}} yutuği">
-            <div class="card-body">
-                <h5 class="card-title">{{fullName}}</h5>
-                <p class="card-text">{{description}}</p>
-            </div>
-            <div class="card-footer bg-transparent">
-                <small class="text-muted">Sana: {{formatDate createdAt}}</small>
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card achievement-card position-relative">
+                <span class="badge bg-success badge-corner">Yutuq</span>
+                <div class="achievement-image-wrapper">
+                    <!-- Limit image height -->
+                    <img src="{{image}}" class="achievement-image" alt="{{fullName}} yutuği">
+                </div>
+                <div class="card-content">
+                    <h5 class="card-title">{{fullName}}</h5>
+                    <p class="card-text">{{description}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Sana: {{formatDate createdAt}}</small>
+                </div>
             </div>
         </div>
         {{/each}}
