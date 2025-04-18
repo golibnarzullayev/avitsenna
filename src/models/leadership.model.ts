@@ -23,10 +23,16 @@ const leadershipSchema = new Schema(
       type: String,
       required: true,
     },
+    order: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,
   }
 );
+
+leadershipSchema.index({ order: 1 });
 
 export default model<ILeadership>("leadership", leadershipSchema);

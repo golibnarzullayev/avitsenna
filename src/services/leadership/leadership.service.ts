@@ -6,6 +6,8 @@ import { Response } from "express";
 import path from "node:path";
 import fs from "node:fs";
 import { OrderBy } from "@/enums/mongo-query.enum";
+import _ from "lodash";
+import { OrderDirection } from "@/enums/order-direction.enum";
 
 class LeadershipService {
   private repo = new LeadershipRepo();
@@ -57,12 +59,16 @@ class LeadershipService {
     const { fullName, position, isLeader, description } = req.body;
     const fileName = req.file.filename;
 
+    const greatestOrder = await this.repo.getGreatestOrder();
+    const order = _.isNil(greatestOrder) ? 0 : greatestOrder + 1;
+
     await this.repo.create({
       fullName,
       position,
       isLeader: isLeader === "on",
       description,
       image: `/uploads/leaderships/${fileName}`,
+      order,
     });
 
     res.redirect("/admin/leadership");
@@ -88,7 +94,8 @@ class LeadershipService {
     const id = req.params.id;
 
     const data: Partial<ILeadership> = {};
-    const { fullName, position, isLeader, description } = req.body;
+    const { fullName, position, isLeader, description, order } = req.body;
+    console.log(order);
 
     const leadership = await this.repo.getById(id);
 
@@ -108,6 +115,20 @@ class LeadershipService {
       }
 
       data.image = `/uploads/leaderships/${req.file.filename}`;
+    }
+
+    if (!_.isNil(order)) {
+      if (leadership.order > order) {
+        const orderFilter = { $gte: order, $lt: leadership.order };
+
+        await this.repo.updateOrder(OrderDirection.Increment, orderFilter);
+      }
+
+      if (leadership.order < order) {
+        const orderFilter = { $gt: leadership.order, $lte: order };
+
+        await this.repo.updateOrder(OrderDirection.Decrement, orderFilter);
+      }
     }
 
     await this.repo.updateById(id, data);

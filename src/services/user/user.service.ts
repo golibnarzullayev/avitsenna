@@ -91,7 +91,7 @@ class UserService {
     const pipelineLeader = new MongoQueryService({ ...req.query, limit: "all" })
       .paginating()
       .filtering({}, { isLeader: true })
-      .sorting("createdAt", OrderBy.Asc)
+      .sorting("order", OrderBy.Asc)
       .getPipeline();
 
     const pipelineTeacher = new MongoQueryService({
@@ -100,7 +100,7 @@ class UserService {
     })
       .paginating()
       .filtering({}, { isLeader: false })
-      .sorting("createdAt", OrderBy.Asc)
+      .sorting("order", OrderBy.Asc)
       .getPipeline();
 
     const resultLeader = await this.leadershipRepo.aggregate<

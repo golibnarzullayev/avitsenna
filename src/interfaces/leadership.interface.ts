@@ -5,6 +5,7 @@ export interface ILeadership {
   position: string;
   isLeader: boolean;
   description: string;
+  order: number;
   createdAt: Date;
   updatedAt: Date;
 }
