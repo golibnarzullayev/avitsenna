@@ -95,13 +95,12 @@ class LeadershipService {
 
     const data: Partial<ILeadership> = {};
     const { fullName, position, isLeader, description, order } = req.body;
-    console.log(order);
 
     const leadership = await this.repo.getById(id);
 
     if (fullName) data.fullName = fullName;
     if (position) data.position = position;
-    if (isLeader) data.isLeader = isLeader === "on";
+    data.isLeader = isLeader === "on";
     if (description) data.description = description;
     if (order) data.order = order;
 
