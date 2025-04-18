@@ -103,6 +103,7 @@ class LeadershipService {
     if (position) data.position = position;
     if (isLeader) data.isLeader = isLeader === "on";
     if (description) data.description = description;
+    if (order) data.order = order;
 
     if (req.file) {
       const oldImagePath = path.join(
