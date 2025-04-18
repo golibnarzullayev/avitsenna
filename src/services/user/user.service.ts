@@ -88,10 +88,6 @@ class UserService {
   };
 
   public renderLeadershipPage = async (req: IRequest, res: Response) => {
-    if (req.url === "/leaderships") {
-      return res.redirect(`?page=1`);
-    }
-
     const pipelineLeader = new MongoQueryService({ ...req.query, limit: "all" })
       .paginating()
       .filtering({}, { isLeader: true })
