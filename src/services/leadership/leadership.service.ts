@@ -118,13 +118,13 @@ class LeadershipService {
     }
 
     if (!_.isNil(order)) {
-      if (leadership.order > order) {
+      if (leadership.order > Number(order)) {
         const orderFilter = { $gte: order, $lt: leadership.order };
 
         await this.repo.updateOrder(OrderDirection.Increment, orderFilter);
       }
 
-      if (leadership.order < order) {
+      if (leadership.order < Number(order)) {
         const orderFilter = { $gt: leadership.order, $lte: order };
 
         await this.repo.updateOrder(OrderDirection.Decrement, orderFilter);
