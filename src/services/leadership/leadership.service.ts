@@ -103,7 +103,9 @@ class LeadershipService {
         `../../../public${leadership.image}`
       );
 
-      fs.unlinkSync(oldImagePath);
+      if (fs.existsSync(oldImagePath)) {
+        fs.unlinkSync(oldImagePath);
+      }
 
       data.image = `/uploads/leaderships/${req.file.filename}`;
     }
