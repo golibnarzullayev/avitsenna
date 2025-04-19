@@ -84,6 +84,10 @@ export class Server {
     routes.forEach((route) => {
       this.app.use("/", route.router);
     });
+
+    this.app.use("*", (req, res) => {
+      res.render("pages/404");
+    });
   }
 
   private async initializeDatabase() {
