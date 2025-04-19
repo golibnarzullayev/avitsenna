@@ -21,7 +21,7 @@ class UserRoute {
       this.controller.renderLeadershipPage
     );
     this.router.get(
-      `${this.path}/news/slug`,
+      `${this.path}/news/:slug`,
       this.controller.renderSingleNewsPage
     );
     this.router.get(
