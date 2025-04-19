@@ -93,17 +93,11 @@ export class Server {
       );
 
       const robotsData = {
+        userAgentForGoogle: "Googlebot",
+        disallowForGoogle: "/nogooglebot/",
         userAgent: "*",
         disallow: ["/admin", "/auth"],
-        allow: [
-          "/",
-          "/leaderships",
-          "/classes",
-          "/news",
-          "/news/:slug",
-          "/achievements",
-          "/galleries",
-        ],
+        allow: ["/"],
         sitemapUrl: "https://avitsennamaktabi.uz/sitemap.xml",
       };
 
