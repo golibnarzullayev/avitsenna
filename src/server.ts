@@ -1,6 +1,7 @@
 import express from "express";
 import { connectMongo, environment } from "@/config";
 
+import fs from "node:fs";
 import path from "node:path";
 
 import { engine } from "express-handlebars";
@@ -83,6 +84,32 @@ export class Server {
     );
     routes.forEach((route) => {
       this.app.use("/", route.router);
+    });
+
+    this.app.get("/robots.txt", (req, res) => {
+      const template = fs.readFileSync(
+        path.join(__dirname, "views", "robots.hbs"),
+        "utf-8"
+      );
+
+      const robotsData = {
+        userAgent: "*",
+        disallow: ["/admin", "/auth"],
+        allow: [
+          "/",
+          "/leaderships",
+          "/classes",
+          "/news",
+          "/news/:slug",
+          "/achievements",
+          "/galleries",
+        ],
+        sitemapUrl: "https://avitsennamaktabi.uz/sitemap.xml",
+      };
+
+      const rendered = Handlebars.compile(template)(robotsData);
+      res.type("text/plain");
+      res.send(rendered);
     });
 
     this.app.use("*", (req, res) => {
