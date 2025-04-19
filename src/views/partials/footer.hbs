@@ -1,132 +1,396 @@
 <style>
+    :root {
+        --primary-color: #0d3575;
+        --accent-color: #4285f4;
+        --light-accent: rgba(66, 133, 244, 0.1);
+        --text-light: #ffffff;
+        --text-muted: rgba(255, 255, 255, 0.7);
+        --text-highlight: #ffc107;
+        --border-color: rgba(255, 255, 255, 0.1);
+    }
+
     .footer {
-        background-color: #0d3575;
-        color: #ffffff;
-        padding: 50px 0;
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        padding: 70px 0 30px;
+        position: relative;
+        overflow: hidden;
     }
+
+    .footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, var(--accent-color), var(--text-highlight));
+    }
+
+    .footer-wave {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0.05;
+        z-index: 0;
+    }
+
+    .footer-content {
+        position: relative;
+        z-index: 1;
+    }
+
     .footer h4 {
-        color: #ffffff;
-        font-weight: bold;
-        margin-bottom: 20px;
+        color: var(--text-light);
+        font-weight: 600;
+        margin-bottom: 25px;
+        position: relative;
+        padding-bottom: 15px;
+        font-size: 1.25rem;
+        letter-spacing: 0.5px;
     }
+
+    .footer h4::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background-color: var(--accent-color);
+        border-radius: 3px;
+    }
+
     .footer-links {
         list-style: none;
         padding-left: 0;
     }
+
     .footer-links li {
-        margin-bottom: 10px;
+        margin-bottom: 12px;
+        transition: transform 0.3s ease;
     }
+
+    .footer-links li:hover {
+        transform: translateX(5px);
+    }
+
     .footer-links a {
-        color: #b0b8c9;
+        color: var(--text-muted);
         text-decoration: none;
         transition: color 0.3s;
+        display: flex;
+        align-items: center;
+        font-size: 0.95rem;
     }
+
     .footer-links a:hover {
-        color: #ffffff;
+        color: var(--text-light);
     }
+
+    .footer-links a i {
+        margin-right: 8px;
+        font-size: 0.8rem;
+    }
+
+    .contact-info {
+        margin-bottom: 12px;
+    }
+
+    .contact-info a {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.3s;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .contact-info a:hover {
+        color: var(--text-light);
+    }
+
+    .contact-info i {
+        width: 25px;
+        color: var(--accent-color);
+        margin-right: 10px;
+    }
+
     .map-container {
         position: relative;
         height: 200px;
-        border-radius: 5px;
+        border-radius: 10px;
         overflow: hidden;
-        margin-top: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
+
     .map-container iframe {
         width: 100%;
         height: 100%;
         border: none;
-        border-radius: 5px;
     }
-    .map-info {
+
+    .social-links {
         display: flex;
-        justify-content: space-between;
-        font-size: 0.8rem;
-        color: #b0b8c9;
-        margin-top: 5px;
+        margin-top: 20px;
     }
+
     .social-icon {
-        color: #b0b8c9;
-        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
         margin-right: 15px;
+        color: var(--text-light);
+        transition: all 0.3s ease;
     }
-    .logo-container {
+
+    .social-icon:hover {
+        background-color: var(--accent-color);
+        transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+        border-top: 1px solid var(--border-color);
+        padding-top: 25px;
+        margin-top: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-light);
         display: flex;
         align-items: center;
     }
-    .logo-container img {
-        max-width: 150px;
+
+    .footer-logo span {
+        color: var(--accent-color);
     }
-    .footer-bottom {
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding-top: 20px;
-        margin-top: 20px;
+
+    .copyright {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 40px auto 0;
+        padding: 25px;
+        background-color: rgba(255, 255, 255, 0.03);
+        border-radius: 10px;
+    }
+
+    .timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(66, 133, 244, 0.03), rgba(255, 193, 7, 0.03));
+        border-radius: 10px;
+    }
+
+    .timeline-title {
+        text-align: center;
+        color: var(--text-light);
+        margin-bottom: 20px;
+        font-weight: 300;
+        letter-spacing: 1px;
+    }
+
+    .timeline-content {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1;
+    }
+
+    .timeline-event {
+        text-align: center;
+        flex: 1;
+    }
+
+    .timeline-event::after,
+    .timeline-event-2::after {
+        content: "";
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        width: 100%;
+        height: 1px;
+        background-color: var(--border-color);
+        transform: translateX(-50%);
+        z-index: -1;
+    }
+
+    .timeline-event:last-child::after {
+        display: none;
+    }
+
+    .timeline-year {
+        display: inline-block;
+        background-color: var(--primary-color);
+        border: 2px solid var(--accent-color);
+        color: var(--text-highlight);
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        line-height: 66px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .timeline-text {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 991px) {
+        .footer {
+            padding: 50px 0 20px;
+        }
+
+        .footer-col {
+            margin-bottom: 40px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .timeline-content {
+            flex-direction: column;
+        }
+        
+        .timeline-event {
+            margin-bottom: 40px;
+        }
+        
+        .timeline-event::after {
+            display: none;
+        }
+        
+        .timeline-event:last-child {
+            margin-bottom: 0;
+        }
+        
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            margin-bottom: 15px;
+        }
+        
+        .copyright {
+            margin-top: 10px;
+        }
     }
 </style>
 
 <footer class="footer">
-  <div class="container">
-      <div class="row">
-          <!-- First Column -->
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h4>FOYDALI HAVOLALAR</h4>
-              <ul class="footer-links">
-                  <li><a href="https://uzbmb.uz/">Davlat test markazi</a></li>
-                  <li><a href="https://yoshlardaftari.uz/supports-2">Yoshlar daftari</a></li>
-                  <li><a href="https://id.egov.uz/oz">Yagona identifikatsiya tizimi</a></li>
-                  <li><a href="https://gov.uz/uz">O'zbekiston Respublikasi hukumat portali</a></li>
-                  <li><a href="https://president.uz/oz">O'zbekiston Respublikasi Prezidentining matbuot xizmati</a></li>
-                  <li><a href="https://my.gov.uz/uz">Yagona interaktiv davlat xizmatlari portali</a></li>
-              </ul>
-          </div>
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#ffffff" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,154.7C384,128,480,96,576,85.3C672,75,768,85,864,112C960,139,1056,181,1152,197.3C1248,213,1344,203,1392,197.3L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+        </svg>
+    </div>
+    
+    <div class="container footer-content">
+        <div class="row">
+            <!-- First Column -->
+            <div class="col-lg-3 col-md-6 footer-col">
+                <h4>FOYDALI HAVOLALAR</h4>
+                <ul class="footer-links">
+                    <li><a href="https://uzbmb.uz/"><i class="bi bi-chevron-right"></i> Davlat test markazi</a></li>
+                    <li><a href="https://yoshlardaftari.uz/supports-2"><i class="bi bi-chevron-right"></i> Yoshlar daftari</a></li>
+                    <li><a href="https://id.egov.uz/oz"><i class="bi bi-chevron-right"></i> Yagona identifikatsiya tizimi</a></li>
+                    <li><a href="https://gov.uz/uz"><i class="bi bi-chevron-right"></i> O'zbekiston Respublikasi hukumat portali</a></li>
+                    <li><a href="https://president.uz/oz"><i class="bi bi-chevron-right"></i> O'zbekiston Respublikasi Prezidenti</a></li>
+                    <li><a href="https://my.gov.uz/uz"><i class="bi bi-chevron-right"></i> Yagona interaktiv davlat xizmatlari</a></li>
+                </ul>
+            </div>
 
-          <!-- Second Column -->
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h4>MANZIL MA'LUMOTLARI</h4>
-              <p>Qashqadaryo viloyati Qarshi shahar Kunchiqar MFY Nurbog' ko'chasi 23-uy</p>
-              <div class="map-container">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3107.2470148087536!2d65.80129087598078!3d38.84970237173422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f4ea7f21b167ac1%3A0x8baf04e4736043cc!2sAvitsenna%20school%20xususiy%20maktabi!5e0!3m2!1sru!2s!4v1744796219216!5m2!1sru!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-              </div>
-          </div>
+            <!-- Second Column -->
+            <div class="col-lg-3 col-md-6 footer-col">
+                <h4>MANZIL MA'LUMOTLARI</h4>
+                <div class="contact-info">
+                    <a href="#"><i class="bi bi-geo-alt-fill"></i> Qashqadaryo viloyati Qarshi shahar Kunchiqar MFY Nurbog' ko'chasi 23-uy</a>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3107.2470148087536!2d65.80129087598078!3d38.84970237173422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f4ea7f21b167ac1%3A0x8baf04e4736043cc!2sAvitsenna%20school%20xususiy%20maktabi!5e0!3m2!1sru!2s!4v1744796219216!5m2!1sru!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
 
-          <!-- Third Column -->
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h4>BOG'LANISH MA'LUMOTLARI</h4>
-              <a href="tel:+998883001234" class="d-block text-white"><strong>Tel:</strong> +998883001234</a>
-              <a href="tel:+998883001234" class="d-block text-white"><strong>Tel:</strong> +998935286139</a>
-              <a href="tel:+998956431234" class="d-block text-white"><strong>Tel:</strong> +998956431234</a>
-              <a href="tel:+998994267536" class="d-block text-white"><strong>Tel:</strong> +998994267536</a>
-              <a href="tel:+998938920208" class="d-block text-white"><strong>Tel:</strong> +998938920208</a>
-          </div>
+            <!-- Third Column -->
+            <div class="col-lg-3 col-md-6 footer-col">
+                <h4>BOG'LANISH MA'LUMOTLARI</h4>
+                <div class="contact-info">
+                    <a href="tel:+998883001234"><i class="bi bi-telephone-fill"></i> +998 88 300 12 34</a>
+                    <a href="tel:+998935286139"><i class="bi bi-telephone-fill"></i> +998 93 528 61 39</a>
+                    <a href="tel:+998956431234"><i class="bi bi-telephone-fill"></i> +998 95 643 12 34</a>
+                    <a href="tel:+998994267536"><i class="bi bi-telephone-fill"></i> +998 99 426 75 36</a>
+                    <a href="tel:+998938920208"><i class="bi bi-telephone-fill"></i> +998 93 892 02 08</a>
+                </div>
+            </div>
 
-          <!-- Fourth Column -->
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h4>IJTIMOIY SAHIFALAR</h4>
-              <ul class="footer-links">
-                  <li>
-                      <a href="https://t.me/AvitsennaMaktabi" target="_blank">
-                          <i class="bi bi-telegram"></i> Telegram
-                      </a>
-                  </li>
-                  <li>
-                      <a href="https://www.instagram.com/avitsenna_maktab_katta?igsh=MXhiaGlmd202djRlNA==" target="_blank">
-                          <i class="bi bi-instagram"></i> Instagram
-                      </a>
-                  </li>
-              </ul>
-          </div>
-      </div>
+            <!-- Fourth Column -->
+            <div class="col-lg-3 col-md-6 footer-col">
+                <h4>IJTIMOIY SAHIFALAR</h4>
+                <p>Bizning ijtimoiy tarmoqdagi sahifalarimizga a'zo bo'ling va so'nggi yangiliklardan xabardor bo'ling</p>
+                <div class="social-links">
+                    <a href="https://t.me/AvitsennaMaktabi" target="_blank" class="social-icon">
+                        <i class="bi bi-telegram"></i>
+                    </a>
+                    <a href="https://www.instagram.com/avitsenna_maktab_katta?igsh=MXhiaGlmd202djRlNA==" target="_blank" class="social-icon">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-      <div class="row footer-bottom">
-          <div class="col-md-6">
-              <div class="logo-container">
-                  <div class="ms-3">
-                      <h5 class="mb-0">Avitsenna xususiy Maktabi</h5>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-6 text-md-end mt-3 mt-md-0">
-              <p class="mb-0">© 2025 Mualliflik xuquqi himoyalangan, Avitsenna</p>
-          </div>
-      </div>
-  </div>
+        <!-- Timeline Section -->
+        <div class="timeline">
+            <h5 class="timeline-title">BIZNING TARIXIY YO'LIMIZ</h5>
+            <div class="timeline-content">
+                <div class="timeline-event">
+                    <div class="timeline-year">2005</div>
+                    <div class="timeline-text">O'quv markazi sifatida faoliyat boshlangan</div>
+                </div>
+                <div class="timeline-event timeline-event-2">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-text">"Avitsenna school" xususiy maktabiga asos solingan</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                Avitsenna <span>School</span>
+            </div>
+            <div class="copyright">
+                © 2025 Mualliflik xuquqi himoyalangan, Avitsenna School
+            </div>
+        </div>
+    </div>
 </footer>
