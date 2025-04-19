@@ -1,3 +1,4 @@
+import SitemapController from "@/controllers/sitemap.controller";
 import UserController from "@/controllers/user.controller";
 import { Router } from "express";
 
@@ -5,6 +6,7 @@ class UserRoute {
   public path = "";
   public router: Router = Router();
   private controller = new UserController();
+  private sitemapController = new SitemapController();
 
   constructor() {
     this.initializeRoutes();
@@ -31,6 +33,10 @@ class UserRoute {
       this.controller.renderAchievementsPage
     );
     this.router.post(`${this.path}/applications`, this.controller.applications);
+    this.router.get(
+      `${this.path}/sitemap.xml`,
+      this.sitemapController.generateSitemap
+    );
   }
 }
 
